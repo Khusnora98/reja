@@ -9,7 +9,7 @@
     "train": "nodemon run train.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Oychehra",
+  "author": "Nora",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.4"
