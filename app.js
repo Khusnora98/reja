@@ -8,15 +8,16 @@ const fs = require("fs");
 //MongoDB call
 
 const db = require("./server").db();
-let user;
-fs.readFile("database/user.json", "utf8",(err, data) => {
-    if(err) {
-        console.log("ERROR", err);
-    } else {
-        user = JSON.parse(data)
-    }
-});
+const mongodb = require("mongodb");
 
+let user;
+fs.readFile("database/user.json", "utf8", (err, data) => {
+  if (err) {
+    console.log("ERROR:", err);
+  } else {
+    user = JSON.parse(data);
+  }
+});
 
 
 //1- Kirish code
@@ -37,15 +38,42 @@ app.set("view engine", "ejs");
 
    // res.end(`<h1 style = "background: yellow ">HELLO WORLD by Nora</h1>`);
    //res.render("harid");
-app.post("/create-item", (req, res) => {
-    console.log(req.body);
-    res.json({test: "success"});
-})
+   app.post("/create-item", (req, res) => {
+    // console.log(req.body);
+    console.log("user entered /create-item");
+    const new_reja = req.body.reja;
+    db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end("something went wrong");
+      } else {
+        res.end("successfully added");
+      }
+    });
+  });
+  app.get("/author", (req, res) => {
+    res.render("author", { user: user });
+  });
+
+    //TODO:code with db here
 
 
-app.get('/', (red, res) => {
-    res.render('rejalar');
-});
+app.get("/", function (req, res) {
+    console.log("user entered /");
+    db.collection("plans")
+      .find()
+      .toArray((err, data) => {
+        if (err) {
+          console.log(err);
+          res.end("something went wrong");
+        } else {
+          // console.log(data);
+          res.render("reja", { items: data });
+        }
+      });
+  });
+  
+  module.exports = app;
 
 app.get("/author", (req, res) => {
     res.render("author", {user: user});

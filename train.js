@@ -1,3 +1,24 @@
+function countDigits(str) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (!isNaN(str[i]) && str[i] !== ' ') {
+            count++;
+        }
+    }
+    return count;
+}
+
+// Masalan:
+console.log(countDigits("ahfhsdd2a5498y79wet0sfdjhj0909b9")); 
+
+
+
+
+
+
+
+
+
 /* console.log("Jack Ma Maslahatlari");
 const list = [
     "yaxshi talaba bo'ling", //0-20
@@ -161,4 +182,5 @@ function countLetter(letter, word) {
 }
 // Natija:
 console.log(countLetter("o", "photo")); 
+
 
