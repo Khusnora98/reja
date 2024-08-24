@@ -10,6 +10,7 @@ const fs = require("fs");
 const db = require("./server").db();
 const mongodb = require("mongodb");
 
+
 let user;
 fs.readFile("database/user.json", "utf8", (err, data) => {
   if (err) {
@@ -53,6 +54,21 @@ app.set("view engine", "ejs");
       console.log(data.ops);
     });
   });
+
+  app.post("/delete-item",(req,res) => {
+    const id = req.body;
+    //console.log(id);
+    //res.end("done");
+    db.collection("plans").deleteOne({_id: new mongodb.ObjectId(id)}, function(err, database){
+      res.json({state:"success"});
+
+    }
+    );
+
+
+  });
+
+
   app.get("/author", (req, res) => {
     res.render("author", { user: user });
   });

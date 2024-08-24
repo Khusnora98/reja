@@ -29,6 +29,36 @@ document.getElementById("create-form").addEventListener("submit", function(e) {
         createField.value = "";
         createField.focus();
     })
-    .catch((err) => {});
+    .catch((err) => {
+        console.log("Please try again!");
+    });
+    
+});
+document.addEventListener("click",function(e){
+//Delete bilan ishlash
+console.log(e.target);
+if(e.target.classList.contains("delete-me")){
+   //alert("you pressed the delete button!") ;
+   if(confirm("Are you sure you want to delete?!")){
+axios
+.post("/delete-item", {id: e.target.getAttribute("data-id") })
+.then((respose) => {
+    console.log(respose.data);
+    e.target.parentELement.parentElement.remove();
+})
+.catch((err) => {
     console.log("Please try again!");
+});
+
+   /*{
+    alert("your answer  is *yes ");
+   }else{
+    alert("your answer  is *no ");
+   }*/
+   
+}
+}
+//Edit bilan ishlash
+if(e.target.classList.contains("edit-me")){
+    alert("you pressed the edit button")};
 });

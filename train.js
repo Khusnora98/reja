@@ -1,3 +1,35 @@
+
+
+
+
+    console.log("======TASK A=====")
+    //Masala izohi:
+    // A-TASK: 
+    // Shunday 2 parametrli function tuzing, hamda birinchi parametrdagi letterni ikkinchi parametrdagi sozdan qatnashga sonini return qilishi kerak boladi.
+    
+    //Masala yechimi:
+    function countLetter(letter, word) {
+        let count = 0;
+        for (let i = 0; i < word.length; i++) {
+            if (word[i] === letter) {
+                count++;
+            }
+        }
+        return count;
+    }
+    // Natija:
+    console.log(countLetter("o", "photo")); 
+    
+    
+    
+    console.log("======TASK B=====")
+    //Masala izohi:
+    // B-TASK: 
+    // Shunday function tuzing, u 1ta string parametrga ega bolsin, hamda osha stringda qatnashgan raqamlarni sonini bizga return qilsin.
+
+    
+    //Masala yechimi:
+
 function countDigits(str) {
     let count = 0;
     for (let i = 0; i < str.length; i++) {
@@ -7,14 +39,81 @@ function countDigits(str) {
     }
     return count;
 }
-
-// Masalan:
 console.log(countDigits("ahfhsdd2a5498y79wet0sfdjhj0909b9")); 
 
 
 
+console.log("======TASK C=====")
+//Masala izohi:
+    // C-TASK: 
+    /*Shunday class tuzing tuzing nomi Shop, va uni constructoriga 3 hil mahsulot pass bolsin, hamda classning 3ta methodi bolsin, biri qoldiq, biri sotish va biri qabul. Har bir method ishga tushgan vaqt ham log qilinsin.
+    
+    MASALAN: const shop = new Shop(4, 5, 2); shop.qoldiq() return hozir 20:40da 4ta non, 5ta lagmon va 2ta cola mavjud! shop.sotish('non', 3) & shop.qabul('cola', 4) & shop.qoldiq() return hozir 20:50da 1ta non, 5ta lagmon va 6ta cola mavjud! */
 
-
+    //Masala yechimi:
+    class Shop {
+        constructor(non, lagmon, cola) {
+          // Uch xil mahsulot uchun zaxirani boshlang'ich miqdorlari
+          this.stock = {
+            non: non,
+            lagmon: lagmon,
+            cola: cola,
+          };
+        }
+      
+        // Hozirgi vaqtni log qilish uchun method
+        logTime() {
+          const now = new Date();
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          return `${hours}:${minutes}`;
+        }
+      
+        // qoldiq va zaxira status 
+        qoldiq() {
+          console.log(
+            `Hozir ${this.logTime()}da ${this.stock.non}ta non, ${this.stock.lagmon}ta lagmon va ${this.stock.cola}ta cola mavjud!`
+          );
+        }
+      
+        // Berilgan miqdorda mahsulot sotish va tranzaktsiyani log qilish uchun method
+        sotish(mahsulot, miqdor) {
+          if (this.stock[mahsulot] !== undefined && this.stock[mahsulot] >= miqdor) {
+            this.stock[mahsulot] -= miqdor;
+            console.log(
+              `Hozir ${this.logTime()}da ${miqdor}ta ${mahsulot} sotildi.`
+            );
+          } else {
+            console.log(
+              `Hozir ${this.logTime()}da yetarli ${mahsulot} mavjud emas!`
+            );
+          }
+        }
+      
+        // Yangi mahsulot add va tranzaktsiyani log qilish uchun method
+        qabul(mahsulot, miqdor) {
+          if (this.stock[mahsulot] !== undefined) {
+            this.stock[mahsulot] += miqdor;
+            console.log(
+              `Hozir ${this.logTime()}da ${miqdor}ta ${mahsulot} qabul qilindi.`
+            );
+          } else {
+            console.log(
+              `Hozir ${this.logTime()}da noto'g'ri mahsulot nomi kiritildi!`
+            );
+          }
+        }
+      }
+      
+      // Classdan foydalanish eg
+      const shop = new Shop(4, 5, 2);
+      shop.qoldiq(); // Natija: Hozir 20:40da 4ta non, 5ta lagmon va 2ta cola mavjud!
+      shop.sotish('non', 3); // Result: Hozir 20:45da 3ta non sotildi.
+      shop.qabul('cola', 4); // Result: Hozir 20:50da 4ta cola qabul qilindi.
+      shop.qoldiq(); // Result: Hozir 20:50da 1ta non, 5ta lagmon va 6ta cola mavjud!
+      
+       
+      
 
 
 
@@ -161,26 +260,4 @@ console.log('passed here 1');
    
 
    
-
-
-
-
-    console.log("======TASK A=====")
-//Masala izohi:
-// A-TASK: 
-// Shunday 2 parametrli function tuzing, hamda birinchi parametrdagi letterni ikkinchi parametrdagi sozdan qatnashga sonini return qilishi kerak boladi.
-
-//Masala yechimi:
-function countLetter(letter, word) {
-    let count = 0;
-    for (let i = 0; i < word.length; i++) {
-        if (word[i] === letter) {
-            count++;
-        }
-    }
-    return count;
-}
-// Natija:
-console.log(countLetter("o", "photo")); 
-
 
