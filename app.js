@@ -43,12 +43,14 @@ app.set("view engine", "ejs");
     console.log("user entered /create-item");
     const new_reja = req.body.reja;
     db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
-      if (err) {
+     /* if (err) {
         console.log(err);
         res.end("something went wrong");
       } else {
         res.end("successfully added");
-      }
+      }*/
+      res.json(data.ops[0]);
+      console.log(data.ops);
     });
   });
   app.get("/author", (req, res) => {
