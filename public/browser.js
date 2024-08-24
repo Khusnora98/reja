@@ -17,48 +17,90 @@ function itemTemplate(item) {
     </div>
   </li>`;
 }
+
+
 let createField = document.getElementById("create-field");
 
-document.getElementById("create-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+document.getElementById("create-form").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    axios
-    .post("/create-item",{reja: createField.value})
+  axios
+    .post("/create-item", { reja: createField.value })
     .then((response) => {
-        document.getElementById("item-list").insertAdjacentHTML("beforeend",itemTemplete(data.data));
-        createField.value = "";
-        createField.focus();
+      document
+        .getElementById("item-list")
+        .insertAdjacentHTML("beforeend", itemTemplate(response.data));
+      createField.value = "";
+      createField.focus();
     })
     .catch((err) => {
-        console.log("Please try again!");
+      console.log("Please try again!");
     });
-    
 });
-document.addEventListener("click",function(e){
-//Delete bilan ishlash
-console.log(e.target);
-if(e.target.classList.contains("delete-me")){
-   //alert("you pressed the delete button!") ;
-   if(confirm("Are you sure you want to delete?!")){
-axios
-.post("/delete-item", {id: e.target.getAttribute("data-id") })
-.then((respose) => {
-    console.log(respose.data);
-    e.target.parentELement.parentElement.remove();
-})
-.catch((err) => {
-    console.log("Please try again!");
-});
+document.addEventListener("click", function (e) {
+  console.log(e);
 
-   /*{
+  //  delete oper
+
+  console.log(e.target);
+  if (e.target.classList.contains("delete-me")) {
+    if (confirm("Are you sure you want to delete?!")) {
+      axios
+        .post("/delete-item", { id: e.target.getAttribute("data-id") })
+        .then((respose) => {
+          console.log(respose.data);
+          e.target.parentElement.parentElement.remove();
+        })
+        .catch((err) => {
+          console.log("Please try again!");
+        });
+    }
+  }
+
+ 
+
+  if (e.target.classList.contains("edit-me")) {
+    let userInput = prompt(
+      "Please Edit",
+      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+    );
+    if (userInput) {
+      axios
+        .post("/edit-item", {
+          id: e.target.getAttribute("data-id"),
+          new_input: userInput,
+        })
+        .then((response) => {
+          console.log(response.data);
+          e.target.parentElement.parentElement.querySelector(
+            ".item-text"
+          ).innerHTML = userInput;
+        })
+        .catch((err) => {
+          console.log("Please try again!");
+           /*{
     alert("your answer  is *yes ");
    }else{
     alert("your answer  is *no ");
    }*/
    
-}
-}
-//Edit bilan ishlash
-if(e.target.classList.contains("edit-me")){
-    alert("you pressed the edit button")};
+        });
+    }
+  }
 });
+document.getElementById("clean-all").addEventListener("click", function () {
+  axios.post("/delete-all", { delete_all: true }).then((respose) => {
+    alert(respose.data.state);
+    document.location.reload();
+  });
+});
+
+ // edit oper
+
+  //    if(e.target.classList.contains("edit-me")) {
+  //       let userInput = prompt("o'zgartirish kiriting")
+  //       if(userInput) {
+  //          console.log(userInput);
+  //       }
+  //    }
+  // });

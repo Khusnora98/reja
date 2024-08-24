@@ -55,17 +55,14 @@ app.set("view engine", "ejs");
     });
   });
 
-  app.post("/delete-item",(req,res) => {
-    const id = req.body;
-    //console.log(id);
-    //res.end("done");
-    db.collection("plans").deleteOne({_id: new mongodb.ObjectId(id)}, function(err, database){
-      res.json({state:"success"});
-
-    }
+  app.post("/delete-item", (req, res) => {
+    const id = req.body.id;
+    db.collection("plans").deleteOne(
+      { _id: new mongodb.ObjectId(id) },
+      function (err, data) {
+        res.json({ state: "success" });
+      }
     );
-
-
   });
 
 
