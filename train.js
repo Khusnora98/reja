@@ -111,9 +111,33 @@ console.log("======TASK C=====")
       shop.sotish('non', 3); // Result: Hozir 20:45da 3ta non sotildi.
       shop.qabul('cola', 4); // Result: Hozir 20:50da 4ta cola qabul qilindi.
       shop.qoldiq(); // Result: Hozir 20:50da 1ta non, 5ta lagmon va 6ta cola mavjud!
+
       
-       
       
+      console.log("======TASK D=====")
+
+      function checkContent(str1, str2) {
+        // Har ikkala stringni arrayga aylantirib, keyin alohida saralash
+        const sortedStr1 = str1.split('').sort().join('');
+        const sortedStr2 = str2.split('').sort().join('');
+        
+        // Saralangan stringlarni solishtirish
+        return sortedStr1 === sortedStr2;
+    }
+    
+    // Misollar
+    console.log(checkContent("mitgroup", "gmtiprou"));  // true
+    console.log(checkContent("hello", "bello"));        // false
+    
+
+
+
+
+
+
+
+
+
 
 
 
