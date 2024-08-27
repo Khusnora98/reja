@@ -7,12 +7,12 @@ function itemTemplate(item) {
       <button
         data-id="${item._id}"
         class="edit-me btn-secondary btn-sm mr-1">
-        O'zgartirish
+        Edit
       </button>
       <button
       data-id="${item._id}"
         class="delete-me btn btn-danger btn-sm">
-        O'chirish
+        Delete
       </button>
     </div>
   </li>`;
@@ -59,14 +59,17 @@ document.addEventListener("click", function (e) {
 
   //edit oper
   if (e.target.classList.contains("edit-me")){
-    let userInput = prompt("add change", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML);
+    let userInput = prompt(
+      "add change", 
+      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+      );
     if (userInput){
        axios
        .post("/edit-item", {
         id: e.target.getAttribute("data-id"), 
        new_input:userInput,
       })
-      .then((response) =>{
+      .then((response) => {
         console.log(response.data);
         e.target.parentElement.parentElement.querySelector(
           ".item-text"
@@ -77,38 +80,10 @@ document.addEventListener("click", function (e) {
         console.log("Please try again!");
       });
     }
-
-    };
-
-  if (e.target.classList.contains("edit-me")) {
-    let userInput = prompt(
-      "Please Edit",
-      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
-    );
-    if (userInput) {
-      axios
-        .post("/edit-item", {
-          id: e.target.getAttribute("data-id"),
-          new_input: userInput,
-        })
-        .then((response) => {
-          console.log(response.data);
-          e.target.parentElement.parentElement.querySelector(
-            ".item-text"
-          ).innerHTML = userInput;
-        })
-        .catch((err) => {
-          console.log("Please try again!");
-           /*{
-    alert("your answer  is *yes ");
-   }else{
-    alert("your answer  is *no ");
-   }*/
-   
-        });
     }
-  }
-});
+  });
+ 
+  
 document.getElementById("clean-all").addEventListener("click", function () {
   axios.post("/delete-all", { delete_all: true }).then((respose) => {
     alert(respose.data.state);
@@ -116,9 +91,3 @@ document.getElementById("clean-all").addEventListener("click", function () {
   });
 });
 
-document.getElementById("clean-all").addEventListener("click", function (){
-  axios.post("/delete-all", {delete_all: true}).then(response => {
-alert (response.data.state);
-document.location.reload();
-  })
-});

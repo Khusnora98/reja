@@ -1,5 +1,4 @@
 console.log('To Start Web Server');
-const { Console } = require("console");
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -64,20 +63,37 @@ app.set("view engine", "ejs");
       }
     );
   });
-app.post("/edit-item", (req, res) =>{
+
+app.post("/edit-item", (req, res) => {
 const data = req.body;
 console.log (data);
-db.collection("plans").findOneAndUpdate({_id: new mongodb.ObjectId(data.id)}, {$set:{reja: data.new_input}}, 
+db.collection("plans").findOneAndUpdate(
+  {_id: new mongodb.ObjectId(data.id)},
+   {$set:{reja: data.new_input}}, 
 function(err, data){
 res.json({state: "success"});
 }
 );
-res.end("done");
+//res.end("done");
 });
 
-  app.get("/author", (req, res) => {
+app.get("/", function (req, res) {
+  console.log("user entered /");
+  db.collection("plans")
+    .find()
+    .toArray((err, data) => {
+      if (err) {
+        console.log(err);
+        res.end("something went wrong");
+      } else {
+        res.render("reja", { items: data });
+      }
+    });
+});
+
+  /*app.get("/author", (req, res) => {
     res.render("author", { user: user });
-  });
+  });*/
 
     //TODO:code with db here
 app.post("/delete-all", (req,res) =>{
@@ -89,27 +105,10 @@ app.post("/delete-all", (req,res) =>{
 });
 
 
-
-app.get("/", function (req, res) {
-    console.log("user entered /");
-    db.collection("plans")
-      .find()
-      .toArray((err, data) => {
-        if (err) {
-          console.log(err);
-          res.end("something went wrong");
-        } else {
-          // console.log(data);
-          res.render("reja", { items: data });
-        }
-      });
-  });
   
   module.exports = app;
 
-app.get("/author", (req, res) => {
+/*app.get("/author", (req, res) => {
     res.render("author", {user: user});
- })
+ })*/
  
-
-module.exports = app;
