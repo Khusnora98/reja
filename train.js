@@ -131,6 +131,17 @@ console.log("======TASK C=====")
     
 
 
+    console.log("======TASK E=====")
+
+    function getReverse(str) {
+      
+      return str.split('').reverse().join('');
+    }
+    
+   
+    console.log(getReverse("hello")); // result: "olleh"
+    
+
 
 
 
