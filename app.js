@@ -112,3 +112,7 @@ app.post("/delete-all", (req,res) =>{
     res.render("author", {user: user});
  })*/
  
+
+
+//pm2 - process manager => external package
+
