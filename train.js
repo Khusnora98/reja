@@ -144,7 +144,35 @@ console.log("======TASK C=====")
 
 
 
-
+    console.log("======TASK - F =====")
+    //Masala izohi:
+        // C-TASK: 
+        /*Shunday findDoublers function tuzing, unga faqat bitta string argument pass bolib, agar    stringda bir hil harf qatnashgan bolsa true, qatnashmasa false qaytarishi kerak.
+       MASALAN: getReverse("hello") return true return qiladi */
+    
+        //Masala yechimi:
+    function findDoublers(str) {
+      // Belgilarni tekshirish uchun bo'sh obyekt yaratamiz
+      let charCount = {};
+    
+      // Satrdagi har bir belgini aylantiramiz
+      for (let char of str) {
+        // Agar belgi allaqachon obyekt ichida bo'lsa, tekshiramiz
+        if (charCount[char]) {
+          return true; // Bir xil harf topildi
+        } else {
+          charCount[char] = 1; // Belgini ko'rilgan deb belgilaymiz
+        }
+      }
+    
+      // Agar bir xil harf topilmasa, false qaytaramiz
+      return false;
+    }
+    
+    // Masalan:
+    console.log(findDoublers("hello")); // true (chunki 'l' harfi ikki marta qatnashgan)
+    console.log(findDoublers("world")); // false (barcha harflar noyob)
+    
 
 
 
@@ -231,7 +259,7 @@ console.log('jabob:', data);
     })
     console.log('passed here 1')*/
 
-    
+ /*
     console.log("Jack Ma Maslahatlari");
 const list = [
     "yaxshi talaba bo'ling", //0-20
@@ -240,7 +268,7 @@ const list = [
     "siz kuchli bo'lgan narsalarni qiling",//40-50
     "yoshlarga investitsiya qiling", //50-60
     "endi dam oling foydasi yoq ", //60
-];
+];*/
 
    /*function maslahatBering(a) {
         if(typeof a != 'number') throw new Error ("Insert number",null);
@@ -254,7 +282,7 @@ const list = [
                 setTimeout (() => {
                 resolve(list[5]);
                 }, 1000);
-            });*/
+            });
             function maslahatBering(a , callback) {
                 if(typeof a != 'number') callback("Insert number", null);
                 else if( a <= 20 ) callback (null, list [0]);
@@ -279,7 +307,7 @@ console.log(javob);
 javob = await maslahatBering (41);
 console.log(javob);
  }
-    run();*/
+    run();
 
 console.log('passed here 0')
 maslahatBering(70,(err, data) =>{
@@ -291,8 +319,7 @@ maslahatBering(70,(err, data) =>{
 });
 console.log('passed here 1'); 
 
-
    
-
+*/
    
 
